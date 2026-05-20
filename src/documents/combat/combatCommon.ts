@@ -160,7 +160,7 @@ export function buildNcsGroupAttackChatData(params: {
 		}),
 		style: CONST.CHAT_MESSAGE_STYLES.OTHER,
 		sound: CONFIG.sounds.dice,
-		rollMode: game.settings.get('core', 'rollMode'),
+		rollMode: game.settings.get('core', 'rollMode') as string,
 		system: {
 			actorName: params.speakerAlias,
 			actorType: params.speakerCombatant?.actor?.type ?? 'minion',

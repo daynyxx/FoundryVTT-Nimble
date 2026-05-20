@@ -49,7 +49,7 @@ export async function buildInitiativeChatData(params: {
 		'rollMode' in msgOpts
 			? (msgOpts.rollMode ?? undefined)
 			: params.combatant.hidden
-				? CONST.DICE_ROLL_MODES.PRIVATE
+				? 'private'
 				: params.chatRollMode;
 
 	// Play 1 sound for the whole rolled set.

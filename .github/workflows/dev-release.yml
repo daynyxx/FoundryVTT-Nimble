@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  node_version: 22
+  node_version: 24
   dev_tag: latest-dev
 
 jobs:

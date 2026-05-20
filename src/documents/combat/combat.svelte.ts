@@ -1011,7 +1011,7 @@ class NimbleCombat extends Combat {
 		// Structure Input data
 		const combatantIds = [...new Set((typeof ids === 'string' ? [ids] : ids).filter(Boolean))];
 		const currentId = this.combatant?.id;
-		const chatRollMode = game.settings.get('core', 'rollMode');
+		const chatRollMode = game.settings.get('core', 'rollMode') as string;
 		const shouldPromptRollDialog = promptRollDialog && combatantIds.length === 1;
 
 		// Iterate over Combatants, performing an initiative roll for each

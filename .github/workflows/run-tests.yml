@@ -5,7 +5,7 @@ on:
     types: [opened, synchronize, reopened]
 
 env:
-  node_version: 22
+  node_version: 24
 
 jobs:
   test:

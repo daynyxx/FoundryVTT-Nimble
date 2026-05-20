@@ -973,7 +973,7 @@ export class NimbleCharacter extends NimbleBaseActor<'character'> {
 
 		ChatMessage.applyRollMode(
 			chatData as unknown as ChatMessage.CreateData,
-			visibilityMode ?? game.settings.get('core', 'rollMode'),
+			visibilityMode ?? (game.settings.get('core', 'rollMode') as string),
 		);
 		const chatCard = await ChatMessage.create(chatData as unknown as ChatMessage.CreateData);
 

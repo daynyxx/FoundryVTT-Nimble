@@ -58,8 +58,8 @@
 	"secondaryTokenAttribute": null,
 	"compatibility": {
 		"minimum": "13",
-		"verified": "13",
-		"maximum": "13"
+		"verified": "14",
+		"maximum": "14"
 	},
 	"documentTypes": {
 		"ActiveEffect": {
@@ -214,5 +214,6 @@
 	"background": "systems/nimble/assets/banners/manticoreFight.webp",
 	"url": "https://github.com/Nimble-Co/FoundryVTT-Nimble",
 	"manifest": "https://github.com/Nimble-Co/FoundryVTT-Nimble/releases/latest/download/system.json",
-	"download": "https://github.com/Nimble-Co/FoundryVTT-Nimble/releases/download/0.8.5/nimble.zip"
+	"download": "https://github.com/Nimble-Co/FoundryVTT-Nimble/releases/download/0.8.5/nimble.zip",
+	"type": "system"
 }

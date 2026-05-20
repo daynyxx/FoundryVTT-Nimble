@@ -333,7 +333,7 @@ async function createNcsGroupAttackChatMessage(params: {
 	});
 	ChatMessage.applyRollMode(
 		chatData as Record<string, unknown>,
-		chatData.rollMode as foundry.CONST.DICE_ROLL_MODES,
+		(chatData.rollMode as foundry.CONST.DICE_ROLL_MODES) ?? 'gmroll',
 	);
 
 	const chatCard = await ChatMessage.create(chatData as unknown as ChatMessage.CreateData);

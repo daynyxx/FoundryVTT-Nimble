@@ -70,8 +70,10 @@ export class NimbleSoloMonster extends NimbleBaseActor {
 
 		ChatMessage.applyRollMode(
 			chatData as unknown as ChatMessage.CreateData,
-			(options.visibilityMode ??
-				game.settings.get('core', 'rollMode')) as foundry.CONST.DICE_ROLL_MODES,
+			// @ts-expect-error - v14 provides backwards compatibility until v16
+			options.visibilityMode ??
+				(game.settings.get('core', 'rollMode') as foundry.CONST.DICE_ROLL_MODES) ??
+				'gmroll',
 		);
 
 		const chatCard = await ChatMessage.create(chatData as unknown as ChatMessage.CreateData);

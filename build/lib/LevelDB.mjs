@@ -20,15 +20,6 @@ export default class LevelDatabase extends ClassicLevel {
 		this.dbOptions = dbOptions;
 		this.#dbKey = dbKey;
 		this.#embeddedKeys = embeddedKeys ?? [];
-
-		this.#documentDb = this.sublevel(dbKey, dbOptions);
-
-		if (this.#embeddedKeys.length) {
-			this.#embeddedDbs = this.#embeddedKeys.map((key) => ({
-				key: key.replaceAll('.', '-'),
-				db: this.sublevel(`${this.#dbKey}.${key}`, dbOptions),
-			}));
-		}
 	}
 
 	#getDBKeys(packName) {
@@ -51,14 +42,34 @@ export default class LevelDatabase extends ClassicLevel {
 	}
 
 	async createPack(docs, options = {}) {
+		await this.open();
+
+		this.#documentDb = this.sublevel(this.#dbKey, this.dbOptions);
+		await this.#documentDb.open();
+
+		if (this.#embeddedKeys.length) {
+			this.#embeddedDbs = [];
+			for (const key of this.#embeddedKeys) {
+				const db = this.sublevel(`${this.#dbKey}.${key}`, this.dbOptions);
+				await db.open();
+				this.#embeddedDbs.push({
+					key: key.replaceAll('.', '-'),
+					db,
+				});
+			}
+		}
+
 		const folders = Array.isArray(options.folders) ? options.folders : [];
 
 		const docBatch = this.#documentDb.batch();
-		const embeddedBatches = this.#embeddedDbs.reduce((acc, { key, db }) => {
-			acc[key] = db.batch();
-			return acc;
-		}, {});
+		const embeddedBatches = this.#embeddedDbs
+			? this.#embeddedDbs.reduce((acc, { key, db }) => {
+					acc[key] = db.batch();
+					return acc;
+				}, {})
+			: {};
 		const folderDb = folders.length > 0 ? this.sublevel('folders', this.dbOptions) : null;
+		if (folderDb) await folderDb.open();
 		const folderBatch = folderDb ? folderDb.batch() : null;
 
 		for (const source of docs) {

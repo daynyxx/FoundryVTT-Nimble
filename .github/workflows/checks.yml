@@ -5,7 +5,7 @@ on: # yamllint disable-line rule:truthy
   - pull_request
 
 env:
-  node_version: 22
+  node_version: 24
 
 jobs:
   typecheck:
