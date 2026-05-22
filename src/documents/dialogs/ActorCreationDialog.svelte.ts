@@ -1,18 +1,13 @@
 import type { DeepPartial } from 'fvtt-types/utils';
 import { SvelteApplicationMixin } from '#lib/SvelteApplicationMixin.svelte.js';
-
+import NimbleNexusImportDialog from '../../import/nimbleNexus/NimbleNexusImportDialog.svelte.js';
 import ActorCreationDialogComponent from '../../view/dialogs/ActorCreationDialog.svelte';
 import CharacterCreationDialog from './CharacterCreationDialog.svelte.js';
-import NimbleNexusImportDialog from '../../import/nimbleNexus/NimbleNexusImportDialog.svelte.js';
 
 const { ApplicationV2 } = foundry.applications.api;
 
 export default class ActorCreationDialog extends SvelteApplicationMixin(ApplicationV2) {
 	declare data: Record<string, unknown>;
-
-	declare parent: unknown;
-
-	declare pack: unknown;
 
 	protected root;
 
@@ -26,13 +21,13 @@ export default class ActorCreationDialog extends SvelteApplicationMixin(Applicat
 				top: Math.round(window.innerHeight * 0.1),
 				left: Math.round((window.innerWidth - width) / 2),
 			},
+			parent,
+			pack,
 		});
 
 		this.root = ActorCreationDialogComponent;
 
 		this.data = data;
-		this.parent = parent;
-		this.pack = pack;
 		this.props = { dialog: this };
 	}
 

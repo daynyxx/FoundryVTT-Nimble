@@ -101,8 +101,6 @@ function resolveSavingThrowRollModes({
 
 export default class CharacterCreationDialog extends SvelteApplicationMixin(ApplicationV2) {
 	data: Record<string, any>;
-	parent: any;
-	pack: any;
 	classFeatureIndex: Promise<ClassFeatureIndex> | null = null;
 	spellIndex: Promise<SpellIndex> | null = null;
 
@@ -117,14 +115,14 @@ export default class CharacterCreationDialog extends SvelteApplicationMixin(Appl
 					top: Math.round(window.innerHeight * 0.1),
 					left: Math.round((window.innerWidth - width) / 2),
 				},
+				parent,
+				pack,
 			}),
 		);
 
 		this.root = CharacterCreationDialogComponent;
 
 		this.data = data;
-		this.parent = parent;
-		this.pack = pack;
 	}
 
 	static override DEFAULT_OPTIONS = {
